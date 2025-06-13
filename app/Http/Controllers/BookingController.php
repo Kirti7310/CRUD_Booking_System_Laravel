@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
 
+namespace App\Http\Controllers;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -34,7 +35,7 @@ class BookingController extends Controller
         
         $request->validate([
             'customer_name'=>'required',
-            'email'=>'required|unique',
+            'email'=>'required',
             'phone'=>'required',
             'booking_date'=>'required|date',
             'notes'=>'required'
