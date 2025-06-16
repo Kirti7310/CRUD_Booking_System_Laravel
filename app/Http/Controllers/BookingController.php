@@ -61,6 +61,7 @@ class BookingController extends Controller
     public function edit(string $id)
     {
         //
+        $booking = Booking::findOrFail($id);
             return view('bookings.edit', compact('booking'));
 
     }
@@ -73,13 +74,14 @@ class BookingController extends Controller
         //
         $request->validate([
             'customer_name'=>'required',
-            'email'=>'required|unique',
+            'email'=>'required',
             'phone'=>'required',
             'booking_date'=>'required|date',
             'notes'=>'required'
         ]);
 
-        Booking::update($request->all());
+        $booking = Booking::findOrFail($id);
+        $booking->update($request->all());
         return redirect()->route('bookings.index')->with('success','Bookings Updated Successfully!');
     }
 
@@ -89,7 +91,8 @@ class BookingController extends Controller
     public function destroy(string $id)
     {
         //
-        Bookings::delete();
+        $booking=Booking::findOrFail($id);
+       $booking->delete();
         return redirect()->route('bookings.index')->with('success','Bookings Deleted Successfully!');
     }
 }

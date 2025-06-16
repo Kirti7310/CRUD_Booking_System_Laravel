@@ -19,6 +19,7 @@
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Booking Date</th>
+                <th>Comments</th>
                 <th>Actions</th>
 
             </tr>
@@ -30,15 +31,16 @@
                 <td>{{ $book->email }}</td>
                 <td>{{ $book->phone }}</td>
                 <td>{{ $book->booking_date }}</td>
+                <td>{{ $book->notes}}</td>
                 <td>
 
-                    <a href="{{ route('bookings.edit',$book->id) }}" class="btn btn-warning btn-sm">View</a>
-                        {{-- <a href="{{ route('bookings.show', $book->id) }}" class="btn btn-info btn-sm">View</a>
-                        <a href="{{ route('bookings.edit', $book->id) }}" class="btn btn-warning btn-sm">Edit</a> --}}
-                        {{-- <form action="{{ route('bookings.destroy', $booking->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?')">
+                    <a href="{{ route('bookings.edit',$book->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    {{-- <a herf="{{ route('bookings.delete',$book->id) }}" class="btn btn-danger btn-sm">Delete</a> --}}
+                    
+                        <form action="{{ route('bookings.delete', $book->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?')">
                             @csrf @method('DELETE')
                             <button class="btn btn-danger btn-sm">Delete</button>
-                        </form> --}}
+                        </form>
                     </td>
             </tr>
             @endforeach
