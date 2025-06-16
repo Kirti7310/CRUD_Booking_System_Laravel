@@ -1,56 +1,66 @@
-@extends('layouts.app')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Booking System') }}
+        </h2>
+    </x-slot>
 
-@section('content')
+    <div class="py-6 px-4 max-w-7xl mx-auto">
+        <a href="{{ route('bookings.create') }}"
+           class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mb-4">
+            Create New Record
+        </a>
 
+        @if(session('success'))
+            <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+                {{ session('success') }}
+            </div>
+        @endif
 
-<div class="container mt-4">
-    <h2> Booking System</h2>
-
-    <a href="{{ route('bookings.create') }}" class="btn btn-primary mb-3">Create New Record</a>
-
-    @if(session('success'))
-    <div class="alert alert-success">{{session('success')}}</div>
-    @endif
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                 <th>Customer Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Booking Date</th>
-                <th>Comments</th>
-                <th>Actions</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($bookings as $book)
-            <tr>
-                <td>{{ $book->customer_name}}</td>
-                <td>{{ $book->email }}</td>
-                <td>{{ $book->phone }}</td>
-                <td>{{ $book->booking_date }}</td>
-                <td>{{ $book->notes}}</td>
-                <td>
-
-                    <a href="{{ route('bookings.edit',$book->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    {{-- <a herf="{{ route('bookings.delete',$book->id) }}" class="btn btn-danger btn-sm">Delete</a> --}}
-                    
-                        <form action="{{ route('bookings.delete', $book->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?')">
-                            @csrf @method('DELETE')
-                            <button class="btn btn-danger btn-sm">Delete</button>
-                        </form>
-                    </td>
-            </tr>
-            @endforeach
-        </tbody>
-
-    </table>
-
-
-
-
-
-</div>
-@endsection
+        <div class="overflow-x-auto bg-white dark:bg-gray-800 rounded shadow">
+            <table class="min-w-full text-sm text-left text-gray-900 dark:text-gray-100">
+                <thead class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
+                    <tr>
+                        <th class="px-4 py-2">Customer Name</th>
+                        <th class="px-4 py-2">Email</th>
+                        <th class="px-4 py-2">Phone</th>
+                        <th class="px-4 py-2">Booking Date</th>
+                        <th class="px-4 py-2">Comments</th>
+                        <th class="px-4 py-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($bookings as $book)
+                        <tr class="border-t dark:border-gray-700">
+                            <td class="px-4 py-2">{{ $book->customer_name }}</td>
+                            <td class="px-4 py-2">{{ $book->email }}</td>
+                            <td class="px-4 py-2">{{ $book->phone }}</td>
+                            <td class="px-4 py-2">{{ $book->booking_date }}</td>
+                            <td class="px-4 py-2">{{ $book->notes }}</td>
+                            <td class="px-4 py-2 space-x-2">
+                                <a href="{{ route('bookings.edit',$book->id) }}"
+                                   class="inline-block bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded text-sm">
+                                    Edit
+                                </a>
+                                <form action="{{ route('bookings.delete', $book->id) }}"
+                                      method="POST" class="inline"
+                                      onsubmit="return confirm('Are you sure?')">
+                                    @csrf @method('DELETE')
+                                    <button type="submit"
+                                            class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                    @if($bookings->isEmpty())
+                        <tr>
+                            <td colspan="6" class="text-center px-4 py-2 text-gray-500">No bookings found.</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
+        </div>
+    </div>
+</x-app-layout>

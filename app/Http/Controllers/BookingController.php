@@ -1,6 +1,6 @@
 <?php
 
-
+  
 namespace App\Http\Controllers;
 use App\Models\Booking;
 use Illuminate\Http\Request;
@@ -50,10 +50,11 @@ class BookingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        return view('bookings.show',comapct('bookings'));
-    }
+    // public function show(string $id)
+    // {
+    //      $booking = Booking::findOrFail($id);
+    // return view('bookings.show', compact('booking'));
+    // }
 
     /**
      * Show the form for editing the specified resource.
