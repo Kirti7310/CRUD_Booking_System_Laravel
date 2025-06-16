@@ -31,7 +31,7 @@
             <main>
                 {{ $slot }}
             </main>
-
+            {{-- testing--}}
             {{-- <section>
                 {{ $bodymain }}
             <section> --}}
