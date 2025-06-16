@@ -63,4 +63,14 @@
             </table>
         </div>
     </div>
+
+    
+
+ {{-- <x-slot name="bodymain">
+        <a href="{{ route('dashboard') }}"
+           class="inline-block bg-yellow-600 text-white px-4 py-2 rounded hover:bg-blue-700 mb-4">
+            Home
+        </a>
+    </x-slot> --}}
+
 </x-app-layout>

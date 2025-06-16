@@ -30,8 +30,12 @@
             <!-- Page Content -->
             <main>
                 {{ $slot }}
-               
+              
             </main>
+
+            {{-- <section>
+                {{ $bodymain }}
+            <section> --}}
         </div>
     </body>
 </html>
